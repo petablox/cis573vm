@@ -1,0 +1,14 @@
+# built binaries
+build
+
+# bitcode and analysis output
+*.ll
+*.out
+*.err
+*.cov
+*.delta
+*.cbi.*
+
+# vim
+.*.swp
+.ycm_extra_conf.py
