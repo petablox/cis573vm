@@ -1,6 +1,6 @@
 .PRECIOUS: %.ll
 
-all: simple0.out simple1.out branch0.out branch1.out pointer0.out pointer1.out
+all: simple0.out simple1.out branch0.out branch1.out pointer0.out pointer1.out input0.out
 
 %.ll: %.c
 	clang -emit-llvm -S -fno-discard-value-names -c -o $@ $<

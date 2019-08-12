@@ -72,6 +72,14 @@ protected:
   std::string getAnalysisName() override { return "DivZero"; }
 };
 
+inline bool isInput(Instruction *I) {
+  if (CallInst *CI = dyn_cast<CallInst>(I)) {
+    return CI->getCalledFunction()->getName().equals("fgetc");
+  } else {
+    return false;
+  }
+}
+
 /**
  * Get the Predecessors of a given instruction in the control-flow graph.
  */
