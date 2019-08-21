@@ -7,17 +7,18 @@ build
 *.err
 *.cov
 *.delta
-*.cbi.*
+*.cbi
 fuzz_output
 formula.smt2
 
-fuzz*
 *.out
 *.err
 simple0
 simple1
 branch0
 branch1
+fuzz0
+fuzz1
 
 # vim
 .*.swp
