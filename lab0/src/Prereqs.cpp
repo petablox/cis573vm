@@ -13,6 +13,8 @@ void Prereqs::print(Module &M) {
 
 bool Prereqs::runOnModule(Module &M) {
   /* Implement your pass here */
+
+  /* DO NOT EDIT BELOW THIS LINE */
   print(M);
   return false;
 }
