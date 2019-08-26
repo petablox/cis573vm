@@ -20,7 +20,7 @@ if (USE_REFERENCE)
     src/DivZeroAnalysis.cpp
   )
 
-  target_link_libraries(DataflowPass ReDomain)
+  target_link_libraries(DataflowPass RefDomain)
 
   add_custom_target(RefDomain ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/reference/* ${CMAKE_CURRENT_BINARY_DIR}/
