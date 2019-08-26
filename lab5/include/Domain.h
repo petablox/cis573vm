@@ -1,17 +1,16 @@
 #ifndef DOMAIN_H
 #define DOMAIN_H
 
-#include "RefDomain.h"
-
 namespace dataflow {
 
+//===----------------------------------------------------------------------===//
+// Abstract Domain Implementation
+//===----------------------------------------------------------------------===//
+
 /*
- * If you want to use your own implementation, replace this line with your
- * class definition.
+ * Implement your abstract domain.
  */
-
-using Domain = RefDomain;
-
-}; // namespace dataflow
+class Domain {};
+} // namespace dataflow
 
 #endif // DOMAIN_H

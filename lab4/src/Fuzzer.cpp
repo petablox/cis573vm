@@ -15,9 +15,9 @@
 void updateSeedInputs(std::string &Target, std::string &Mutated, bool Success) { }
 
 int Freq = 1000000;
-int Count = 0; 
+int Count = 0;
 
-bool test(std::string &Target, std::string &Input, std::string &OutDir) { 
+bool test(std::string &Target, std::string &Input, std::string &OutDir) {
   Count++;
   int ReturnCode = runTarget(Target, Input);
   switch (ReturnCode) {
@@ -59,8 +59,8 @@ int main(int argc, char **argv) {
   }
 
   if (argc >= 5) {
-    Freq = strtol(argv[4],NULL,10); 
-  } 
+    Freq = strtol(argv[4],NULL,10);
+  }
 
   std::string Target(argv[1]);
   std::string SeedInputDir(argv[2]);
@@ -77,8 +77,7 @@ int main(int argc, char **argv) {
     for (auto i = 0; i < SeedInputs.size(); i++) {
       auto I = SeedInputs[i];
 
-      /* If you want to use your own muation function, change this line */
-      std::vector<std::string> Mutants = refMutate(I);
+      std::vector<std::string> Mutants = mutate(I);
 
       for (auto Mutant : Mutants) {
         bool Success = test(Target, Mutant, OutDir);

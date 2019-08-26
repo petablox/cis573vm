@@ -1,10 +1,6 @@
 #ifndef DOMAIN_H
 #define DOMAIN_H
 
-#include "llvm/Support/raw_ostream.h"
-
-using namespace llvm;
-
 namespace dataflow {
 
 //===----------------------------------------------------------------------===//

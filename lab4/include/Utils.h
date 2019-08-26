@@ -18,7 +18,7 @@ std::string readOneFile(std::string &Path) {
 int runTarget(std::string &Target, std::string &Input) {
   std::string Cmd = Target + " > /dev/null 2>&1";
   FILE *F = popen(Cmd.c_str(), "w");
-  fprintf(F, "%s\n", Input.c_str());
+  fprintf(F, "%s", Input.c_str());
   return pclose(F);
 }
 

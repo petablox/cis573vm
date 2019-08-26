@@ -22,6 +22,7 @@ branch0
 branch1
 fuzz0
 fuzz1
+fuzz2
 
 # vim
 .*.swp

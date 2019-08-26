@@ -7,18 +7,28 @@ include(AddLLVM)
 
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 
+option(USE_REFERENCE "Build with reference solution" OFF)
+
 add_definitions(${LLVM_DEFINITIONS})
 include_directories(${LLVM_INCLUDE_DIRS} include)
 link_directories(${LLVM_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SRC_DIR}/reference)
 
-add_llvm_library(DataflowPass MODULE
-  src/DataflowAnalysis.cpp
-  src/DivZeroAnalysis.cpp
-  src/Domain.cpp
+if (USE_REFERENCE)
+  message(STATUS "Use reference solution")
+  add_llvm_library(DataflowPass MODULE
+    src/DataflowAnalysis.cpp
+    src/DivZeroAnalysis.cpp
   )
 
-target_link_libraries(DataflowPass RefDomain)
+  target_link_libraries(DataflowPass RefDomain)
 
-add_custom_target(RefDomain ALL
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/reference/* ${CMAKE_CURRENT_BINARY_DIR}/
-)
+  add_custom_target(RefDomain ALL
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/reference/* ${CMAKE_CURRENT_BINARY_DIR}/
+  )
+else (USE_REFERENCE)
+  add_llvm_library(DataflowPass MODULE
+    src/DataflowAnalysis.cpp
+    src/DivZeroAnalysis.cpp
+    src/Domain.cpp
+    )
+endif (USE_REFERENCE)
