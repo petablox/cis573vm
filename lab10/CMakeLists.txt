@@ -9,7 +9,7 @@ message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 
 add_definitions(${LLVM_DEFINITIONS})
 include_directories(${LLVM_INCLUDE_DIRS} include)
-link_directories(${LLVM_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SRC_DIR}/reference)
+link_directories(${LLVM_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/reference)
 
 add_executable(cbi
   src/Delta.cpp
