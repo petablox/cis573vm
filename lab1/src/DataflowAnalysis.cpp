@@ -59,7 +59,7 @@ bool DataflowAnalysis::runOnFunction(Function &F) {
   doAnalysis(F);
 
   collectErrorInsts(F);
-  outs() << "Potential Instructions by " << getAnalysisName() << ": \n";
+  outs() << "Instructions that potentially divide by zero: \n";
   for (auto I : ErrorInsts) {
     outs() << *I << "\n";
   }
