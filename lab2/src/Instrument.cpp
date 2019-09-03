@@ -10,14 +10,21 @@ static const char *CoverageFunctionName = "__coverage__";
 /*
  * Implement divide-by-zero sanitizer.
  */
-void instrumentSanitizer(Module *M, Function &F, Instruction &I) {}
+void instrumentSanitizer(Module *M, Function &F, Instruction &I) {
+  /* Add you code here */
+}
 
 /*
  * Implement code coverage instrumentation.
  */
-void instrumentCoverage(Module *M, Function &F, Instruction &I) {}
+void instrumentCoverage(Module *M, Function &F, Instruction &I) {
+  /* Add you code here */
+}
 
-bool Instrument::runOnFunction(Function &F) { return true; }
+bool Instrument::runOnFunction(Function &F) {
+  /* Add you code here */
+  return true;
+}
 
 char Instrument::ID = 1;
 static RegisterPass<Instrument>

@@ -11,6 +11,7 @@ namespace dataflow {
  * Implement your abstract domain.
  */
 class Domain {
+  /* Add your code here */
 };
 } // namespace dataflow
 

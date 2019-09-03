@@ -17,9 +17,10 @@ namespace dataflow {
  * 2. Define "alias" that checks whether two pointers may alias each other.
  */
 
-PointerAnalysis::PointerAnalysis(Function &F) {}
+PointerAnalysis::PointerAnalysis(Function &F) { /* Add your code here */ }
 
 bool PointerAnalysis::alias(std::string &Ptr1, std::string &Ptr2) const {
+  /* Add your code here */
   return false;
 }
 }; // namespace dataflow

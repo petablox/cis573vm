@@ -12,7 +12,9 @@
  * Implement your feedback-directed seed update algorithm.
  */
 
-void updateSeedInputs(std::string &Target, std::string &Mutated, bool Success) { }
+void updateSeedInputs(std::string &Target, std::string &Mutated, bool Success) {
+  /* Add your code here */
+}
 
 int Freq = 1000000;
 int Count = 0;

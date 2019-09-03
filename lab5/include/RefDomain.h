@@ -1,5 +1,5 @@
-#ifndef REF_DOMAIN_H
-#define REF_DOMAIN_H
+#ifndef DOMAIN_H
+#define DOMAIN_H
 
 #include "llvm/Support/raw_ostream.h"
 
@@ -27,4 +27,4 @@ raw_ostream &operator<<(raw_ostream &O, Domain V);
 
 }; // namespace dataflow
 
-#endif // REF_DOMAIN_H
+#endif // DOMAIN_H

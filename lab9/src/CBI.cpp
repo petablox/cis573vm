@@ -5,9 +5,9 @@
 #include "Utils.h"
 
 /*
- * Implement your CBI report generator. (Lab 9)
+ * Implement your CBI report generator.
  */
-void generateReport() {}
+void generateReport() { /* Add your code here */ }
 
 // ./CBI [exe file] [fuzzer output dir]
 int main(int argc, char **argv) {

@@ -1,5 +1,5 @@
-#ifndef REF_DOMAIN_H
-#define REF_DOMAIN_H
+#ifndef DOMAIN_H
+#define DOMAIN_H
 
 #include "llvm/Support/raw_ostream.h"
 
@@ -7,24 +7,24 @@ using namespace llvm;
 
 namespace dataflow {
 
-class RefDomain {
+class Domain {
 public:
   enum Element { None, NonZero, Zero, MaybeZero };
-  RefDomain();
-  RefDomain(Element V);
+  Domain();
+  Domain(Element V);
   Element Value;
 
-  static RefDomain *add(RefDomain *E1, RefDomain *E2);
-  static RefDomain *sub(RefDomain *E1, RefDomain *E2);
-  static RefDomain *mul(RefDomain *E1, RefDomain *E2);
-  static RefDomain *div(RefDomain *E1, RefDomain *E2);
-  static RefDomain *join(RefDomain *E1, RefDomain *E2);
-  static bool order(RefDomain E1, RefDomain E2);
+  static Domain *add(Domain *E1, Domain *E2);
+  static Domain *sub(Domain *E1, Domain *E2);
+  static Domain *mul(Domain *E1, Domain *E2);
+  static Domain *div(Domain *E1, Domain *E2);
+  static Domain *join(Domain *E1, Domain *E2);
+  static bool order(Domain E1, Domain E2);
   void print(raw_ostream &O);
 };
 
-raw_ostream &operator<<(raw_ostream &O, RefDomain V);
+raw_ostream &operator<<(raw_ostream &O, Domain V);
 
 }; // namespace dataflow
 
-#endif // REF_DOMAIN_H
+#endif // DOMAIN_H

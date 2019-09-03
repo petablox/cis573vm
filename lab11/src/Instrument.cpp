@@ -8,6 +8,7 @@ namespace instrument {
  * Implement your instrumentation for dynamic symbolic execution engine
  */
 bool Instrument::runOnFunction(Function &F) {
+  /* Add your code here */
   return true;
 }
 

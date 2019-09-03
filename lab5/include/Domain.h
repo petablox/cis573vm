@@ -10,7 +10,9 @@ namespace dataflow {
 /*
  * Implement your abstract domain.
  */
-class Domain {};
+class Domain {
+  /* Add your code here */
+};
 } // namespace dataflow
 
 #endif // DOMAIN_H

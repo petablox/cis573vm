@@ -22,9 +22,10 @@ void Extractor::initialize() {
   Solver->register_relation(Div);
   Solver->register_relation(Alarm);
 
-  /* Rules for Taint Analysis */
   /*
-   * Define your analysis rules and add the rules to the solver.
+   * Add your code here:
+   * Define your analysis rules for taint analysis and add the rules to the
+   * solver.
    */
 }
 
@@ -79,4 +80,5 @@ void Extractor::addNext(const InstMapTy &InstMap, Instruction *X,
  * instruction.
  */
 void Extractor::extractConstraints(const InstMapTy &InstMap, Instruction *I) {
+  /* Add your code here */
 }

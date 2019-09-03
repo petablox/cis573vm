@@ -9,7 +9,10 @@
 /*
  * Implement the delta-debugging algorithm.
  */
-std::string delta(std::string &Target, std::string &Input) { return Input; }
+std::string delta(std::string &Target, std::string &Input) {
+  /* Add your code here */
+  return Input;
+}
 
 // ./delta [exe file] [crashing input file]
 int main(int argc, char **argv) {

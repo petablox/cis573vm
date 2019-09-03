@@ -12,7 +12,7 @@ void Prereqs::print(Module &M) {
 }
 
 bool Prereqs::runOnModule(Module &M) {
-  /* Implement your pass here */
+  /* Add your code here */
 
   /* DO NOT EDIT BELOW THIS LINE */
   print(M);
