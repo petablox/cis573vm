@@ -10,17 +10,17 @@
 int Freq = 1000000;
 int Count = 0;
 
-bool test(std::string &Target, std::string &Input, std::string &OutDir) {
+bool test(std::string &Target, std::string &Input, std::string &CampaignStr, std::string &OutDir) {
   Count++;
   int ReturnCode = runTarget(Target, Input);
   switch (ReturnCode) {
   case 0:
     if (Count % Freq == 0)
-      storePassingInput(Input, OutDir);
+      storePassingInput(Input, CampaignStr, OutDir);
     return true;
   case 256:
     fprintf(stderr, "%d crashes found\n", failureCount);
-    storeCrashingInput(Input, OutDir);
+    storeCrashingInput(Input, CampaignStr, OutDir);
     return false;
   case 127:
     fprintf(stderr, "%s not found\n", Target.c_str());
@@ -29,9 +29,9 @@ bool test(std::string &Target, std::string &Input, std::string &OutDir) {
 }
 
 // ./fuzzer [exe file] [seed input dir] [output dir]
-int main(int argc, char **argv) {
-  if (argc < 4) {
-    printf("Invalid usage\n");
+int main(int argc, char **argv) { 
+  if (argc < 5) { 
+    printf("usage %s [exe file] [seed input dir] [output dir] [campaign]\n", argv[0]);
     return 1;
   }
 
@@ -51,13 +51,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (argc >= 5) {
-    Freq = strtol(argv[4],NULL,10); 
+  if (argc >= 6) {
+    Freq = strtol(argv[5],NULL,10); 
   } 
 
   std::string Target(argv[1]);
   std::string SeedInputDir(argv[2]);
   std::string OutDir(argv[3]);
+
+  std::string CampaignStr(argv[4]);
+  Campaign FuzzCampaign;
+  if (!toCampaign(CampaignStr, FuzzCampaign)) {
+    return 1;
+  }
 
   initialize(OutDir);
 
@@ -69,11 +75,9 @@ int main(int argc, char **argv) {
   while (true) {
     for (auto i = 0; i < SeedInputs.size(); i++) {
       auto I = SeedInputs[i];
-
-      std::vector<std::string> Mutants = mutate(I);
-      for (auto &Mutant : Mutants) {
-        test(Target, Mutant, OutDir);
-      }
+      std::string Mutant = mutate(I, FuzzCampaign);
+      test(Target, Mutant, CampaignStr, OutDir);
+      SeedInputs.push_back(Mutant);
     }
   }
   return 0;

@@ -53,15 +53,15 @@ void initialize(std::string &OutDir) {
   mkdir(FailureDir.c_str(), 0755);
 }
 
-void storePassingInput(std::string &Input, std::string &OutDir) {
-  std::string Path = OutDir + "/success/input" + std::to_string(successCount++);
+void storePassingInput(std::string &Input, std::string &CampaignStr, std::string &OutDir) {
+  std::string Path = OutDir + "/success/input" + std::to_string(successCount++) + "-" + CampaignStr;
   std::ofstream OutFile(Path);
   OutFile << Input;
   OutFile.close();
 }
 
-void storeCrashingInput(std::string &Input, std::string &OutDir) {
-  std::string Path = OutDir + "/failure/input" + std::to_string(failureCount++);
+void storeCrashingInput(std::string &Input, std::string &CampaignStr, std::string &OutDir) {
+  std::string Path = OutDir + "/failure/input" + std::to_string(failureCount++) + "-" + CampaignStr;
   std::ofstream OutFile(Path);
   OutFile << Input;
   OutFile.close();

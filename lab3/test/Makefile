@@ -1,4 +1,4 @@
-TARGETS=simple0 simple1 fuzz0 fuzz1
+TARGETS=sanity easy easy2
 
 all: ${TARGETS}
 
