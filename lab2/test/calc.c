@@ -5,7 +5,7 @@ int main() {
 
   do {
     printf("Enter an operator (+, -, *, /): ");
-    scanf("%c", &operator);
+    scanf(" %c", &operator);
     printf("Enter two operands: ");
     scanf("%d %d", &firstNumber, &secondNumber);
     switch (operator) {
@@ -19,7 +19,7 @@ int main() {
         printf("%d * %d = %d\n",firstNumber, secondNumber, firstNumber * secondNumber);
         break;
       case '/':
-        printf("%d / %d = %d\n",firstNumber, secondNumber, firstNumber / secondNumber);
+        printf("%d / %d = %d\n",firstNumber, secondNumber, firstNumber / secondNumber); // Divide by zero
         break;
       default:
         printf("Error! operator is not correct");
