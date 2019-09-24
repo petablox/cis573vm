@@ -3,33 +3,60 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cstdio>
 
-#include "RefMutate.h"
 #include "Mutate.h"
 #include "Utils.h"
+
+#include <time.h>
+
+std::string CampaignToStr(Campaign &FuzzCamp) {
+  switch (FuzzCamp) {
+    case MutationA:
+        return "MutationA";
+    case MutationB:
+        return "MutationB";
+    case MutationC:
+        return "MutationC";
+  }
+} 
+
 
 /*
  * Implement your feedback-directed seed update algorithm.
  */
+std::pair<std::string,Campaign> selectSeedAndCampaign() {
 
-void updateSeedInputs(std::string &Target, std::string &Mutated, bool Success) {
-  /* Add your code here */
+  std::string Seed = SeedInputs[MutationA].back();
+  Campaign FuzzCamp = MutationA;
+
+  return std::make_pair(Seed,FuzzCamp);
 }
 
-int Freq = 1000000;
+/*
+ * Implement your feedback-directed seed update algorithm.
+ */
+void updateSeedInputs(std::string &Target, std::string &Mutated, Campaign &FuzzCamp, bool Success) {
+}
+
+int Freq = 1000;
 int Count = 0;
 
-bool test(std::string &Target, std::string &Input, std::string &OutDir) {
+bool test(std::string &Target, std::string &Input, Campaign &FuzzCamp, std::string &OutDir) {
+  // Clean up old coverage file before running 
+  std::string CoveragePath = Target + ".cov";
+  std::remove(CoveragePath.c_str());
   Count++;
+
   int ReturnCode = runTarget(Target, Input);
   switch (ReturnCode) {
   case 0:
     if (Count % Freq == 0)
-      storePassingInput(Input, OutDir);
+      storePassingInput(Input, CampaignToStr(FuzzCamp), OutDir);
     return true;
   case 256:
     fprintf(stderr, "%d crashes found\n", failureCount);
-    storeCrashingInput(Input, OutDir);
+    storeCrashingInput(Input, CampaignToStr(FuzzCamp), OutDir);
     return false;
   case 127:
     fprintf(stderr, "%s not found\n", Target.c_str());
@@ -38,11 +65,13 @@ bool test(std::string &Target, std::string &Input, std::string &OutDir) {
 }
 
 // ./fuzzer [exe file] [seed input dir] [output dir]
-int main(int argc, char **argv) {
-  if (argc < 4) {
-    printf("Invalid usage\n");
+int main(int argc, char **argv) { 
+  if (argc < 4) { 
+    printf("usage %s [exe file] [seed input dir] [output dir]\n", argv[0]);
     return 1;
   }
+
+  srand(time(NULL));
 
   struct stat Buffer;
   if (stat(argv[1], &Buffer)) {
@@ -61,7 +90,7 @@ int main(int argc, char **argv) {
   }
 
   if (argc >= 5) {
-    Freq = strtol(argv[4],NULL,10);
+    Freq = strtol(argv[5], NULL, 10);
   }
 
   std::string Target(argv[1]);
@@ -76,16 +105,12 @@ int main(int argc, char **argv) {
   }
 
   while (true) {
-    for (auto i = 0; i < SeedInputs.size(); i++) {
-      auto I = SeedInputs[i];
-
-      std::vector<std::string> Mutants = mutate(I);
-
-      for (auto Mutant : Mutants) {
-        bool Success = test(Target, Mutant, OutDir);
-        updateSeedInputs(Target, Mutant, Success);
-      }
-    }
+      // NOTE: You should feel free to manipulate this run loop 
+      std::pair<std::string,Campaign> SC = selectSeedAndCampaign();
+      auto Mutant = mutate(SC.first, SC.second);
+      auto Success = test(Target, Mutant, SC.second, OutDir);
+      updateSeedInputs(Target, Mutant, SC.second, Success);
   }
+
   return 0;
 }

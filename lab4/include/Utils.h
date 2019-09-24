@@ -22,7 +22,7 @@ int runTarget(std::string &Target, std::string &Input) {
   return pclose(F);
 }
 
-std::vector<std::string> SeedInputs;
+std::map<Campaign,std::vector<std::string>> SeedInputs;
 
 int readSeedInputs(std::string &SeedInputDir) {
   DIR *Directory;
@@ -33,7 +33,9 @@ int readSeedInputs(std::string &SeedInputDir) {
         continue;
       std::string Path = SeedInputDir + "/" + std::string(Ent->d_name);
       std::string Line = readOneFile(Path);
-      SeedInputs.push_back(Line);
+      SeedInputs[MutationA].push_back(Line);
+      SeedInputs[MutationB].push_back(Line);
+      SeedInputs[MutationC].push_back(Line);
     }
     closedir(Directory);
     return 0;
@@ -53,15 +55,15 @@ void initialize(std::string &OutDir) {
   mkdir(FailureDir.c_str(), 0755);
 }
 
-void storePassingInput(std::string &Input, std::string &OutDir) {
-  std::string Path = OutDir + "/success/input" + std::to_string(successCount++);
+void storePassingInput(std::string &Input, const std::string &CampaignStr, std::string &OutDir) {
+  std::string Path = OutDir + "/success/input" + std::to_string(successCount++) + "-" + CampaignStr;
   std::ofstream OutFile(Path);
   OutFile << Input;
   OutFile.close();
 }
 
-void storeCrashingInput(std::string &Input, std::string &OutDir) {
-  std::string Path = OutDir + "/failure/input" + std::to_string(failureCount++);
+void storeCrashingInput(std::string &Input, const std::string &CampaignStr, std::string &OutDir) {
+  std::string Path = OutDir + "/failure/input" + std::to_string(failureCount++) + "-" + CampaignStr;
   std::ofstream OutFile(Path);
   OutFile << Input;
   OutFile.close();
