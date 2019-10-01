@@ -8,16 +8,46 @@ namespace dataflow {
 
 /**
  * Implement your data-flow analysis.
- * 1. Define "transfer" that computes the semantics of each instruction.
- * 2. Define "doAnalysis" that stores your results in "InMap" and "OutMap".
- * 3. Define "check" that checks if a given instruction is erroneous or not.
+ * 1. Define "join" that joins the memory state of two flows.
+ * 2. Define "order" which states if two memory sets are ordered
+ * 3. Define "flowIn" that joins the memory set of all incomming flows
+ * 4. Define "transfer" that computes the semantics of each instruction.
+ * 5. Define "flowOut" that flows the memory set to all outgoing flows
+ * 6. Define "doAnalysis" that stores your results in "InMap" and "OutMap".
+ * 7. Define "check" that checks if a given instruction is erroneous or not.
  */
+
+
+void join(Memory *Result, Memory *M1, Memory *M2) {
+  /* Add your code here */
+}
+
+bool order(Memory *M1, Memory *M2) {
+  /* Add your code here */
+}
+
+
+void DivZeroAnalysis::flowIn(Instruction *I, Memory *In) {
+  /* Add your code here */
+}
 
 void DivZeroAnalysis::transfer(Instruction *I, const Memory *In, Memory *NOut) {
   /* Add your code here */
 }
 
-void DivZeroAnalysis::doAnalysis(Function &F) { /* Add your code here */ }
+void DivZeroAnalysis::flowOut(Instruction *I, Memory *Pre, Memory *Post,  SetVector <Instruction *> &WorkSet) {
+  /* Add your code here */
+}
+
+void DivZeroAnalysis::doAnalysis(Function &F) { 
+  SetVector<Instruction *> WorkSet;
+  for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
+    WorkSet.insert(&(*I));
+  }
+
+  /* Add your code here */ 
+
+}
 
 bool DivZeroAnalysis::check(Instruction *I) {
   /* Add your code here */
