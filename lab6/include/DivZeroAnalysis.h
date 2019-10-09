@@ -14,6 +14,11 @@ protected:
 
   void doAnalysis(Function &F, PointerAnalysis *PA) override;
 
+  void flowIn(Instruction *I, Memory *In);
+
+  void flowOut(Instruction *I, Memory *In, Memory *NOut,  SetVector <Instruction *> &);
+
+
   bool check(Instruction *I) override;
 
   std::string getAnalysisName() override { return "DivZero"; }
