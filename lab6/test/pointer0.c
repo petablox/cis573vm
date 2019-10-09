@@ -1,8 +1,8 @@
 int f(){
-  int a;
+  int a = 1;
   int *c = &a;
   int *d = &a;
   *c = 0;
   int x = 1 / *d;
-  return 0;
+  return x;
 }

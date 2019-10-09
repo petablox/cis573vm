@@ -2,9 +2,11 @@
 
 void f() {
   int x = fgetc(stdin);
-  int y = 2;
+  int y = 0;
   if (x > 10) {
-    y = 0;
+    y = 1;
+  } else {
+    y = 2;
   }
-  int z = x / y; // divide-by-zero after branch
+  int z = x / y; 
 }
