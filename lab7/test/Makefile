@@ -1,6 +1,6 @@
 .PRECIOUS: %.ll
 
-TARGETS=simple0.out simple1.out branch0.out loop0.out
+TARGETS=simple0.out simple1.out branch0.out loop0.out branch1.out branch2.out loop1.out
 
 all: ${TARGETS}
 
