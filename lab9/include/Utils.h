@@ -91,7 +91,7 @@ void generateLogFiles(std::string &Target, std::string &LogDir) {
     exit(1);
   }
 
-  std::regex Reg("input[0-9]+");
+  std::regex Reg("input[0-9]+.*");
 
   while ((Ent = readdir(Directory)) != NULL) {
     if (!(Ent->d_type == DT_REG))
