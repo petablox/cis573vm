@@ -6,4 +6,4 @@ all: ${TARGETS}
 	clang -emit-llvm -S -fno-discard-value-names -c -o $@.ll $<
 
 clean:
-	rm -f *.ll formula.smt2 ${TARGETS}
+	formula.smt2 ${TARGETS}
