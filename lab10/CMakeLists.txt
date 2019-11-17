@@ -11,7 +11,7 @@ add_definitions(${LLVM_DEFINITIONS})
 include_directories(${LLVM_INCLUDE_DIRS} include)
 link_directories(${LLVM_LIBRARY_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/reference)
 
-add_executable(cbi
+add_executable(delta
   src/Delta.cpp
   )
 
